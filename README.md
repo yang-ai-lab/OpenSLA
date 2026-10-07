@@ -1,4 +1,4 @@
-# OpenSLA: Open Sensor-Language-Action Models
+# Sensor-Language-Action Models
 
 [![Paper](https://img.shields.io/badge/paper-arXiv-red)](https://arxiv.org/abs/2610.08244)
 [![Webpage](https://img.shields.io/badge/website-project-blue)](https://yang-ai-lab.github.io/OpenSLA/)
@@ -9,18 +9,19 @@
 
 ## 🔥 News
 
-- [2026.10.6] Our paper is available on [arXiv](https://arxiv.org/abs/2610.08244).
-- [2026.10.3] Our code is released.
+- **[2026-10-06]** Our paper is available on [arXiv](https://arxiv.org/abs/2610.08244).
+- **[2026-10-06]** Code released on GitHub, and model released on [HuggingFace](https://huggingface.co/yang-ai-lab/OpenSLA).
+- **[2026-10-06]** [Project website](https://yang-ai-lab.github.io/OpenSLA/) is live!
 
 ## 📖 Introduction
 
-OpenSLA takes a multi-channel sensor history together with language context and
+**OpenSLA** is a new family of models - _Sensor-Langauge-Action_ (SLA) models. It takes a multi-channel sensor history together with language context and
 produces a structured action prediction and a sensor-state caption. We release
 two variants:
 
 - **OpenSLA-B**: sensor tokens are projected and prepended to the language
   prompt as a flat token prefix.
-- **OpenSLA-H**: builds on B with a hierarchical sensor encoder that compresses
+- **OpenSLA-H**: builds on the Base model with a hierarchical sensor encoder that compresses
   the signal into local, per-channel, and global memory tokens.
 
 
