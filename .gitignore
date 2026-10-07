@@ -1,0 +1,27 @@
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.ruff_cache/
+.venv/
+build/
+dist/
+.env
+.env.*
+*.pem
+*.key
+/data/
+/outputs/
+/logs/
+/pretrained_weights/*
+!/pretrained_weights/README.md
+*.pt
+*.pth
+*.ckpt
+*.safetensors
+*.out
+*.err
+.DS_Store
+
+# The manuscript is not distributed from this repository.
+*.pdf

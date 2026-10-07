@@ -1,0 +1,16 @@
+{
+  "domain": "clinical",
+  "checkpoint": "pretrained_weights/opensla_h_clinical.pt",
+  "dino_checkpoint": "pretrained_weights/waveform_encoder.ckpt",
+  "numeric_config": "pretrained_weights/numeric_config.json",
+  "action_group_types": "pretrained_weights/action_group_types.json",
+  "model_id": null,
+  "input": "data/preprocessed_batch.pt",
+  "output": "outputs/predictions.jsonl",
+  "device": "cuda",
+  "max_new_tokens": 512,
+  "necessity_threshold": 0.5,
+  "category_threshold": 0.5,
+  "labels_per_category": 3,
+  "max_categories": 5
+}

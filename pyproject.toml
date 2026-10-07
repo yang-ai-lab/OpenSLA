@@ -1,0 +1,26 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "OpenSLA"
+version = "0.1.0"
+description = "OpenSLA: Sensor-Language-Action Model Inference"
+license = {text = "MIT"}
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = ["torch>=2.5", "numpy>=1.24", "einops>=0.8", "transformers>=5.8.1,<6", "peft>=0.12", "accelerate>=0.34"]
+
+[project.optional-dependencies]
+demo = ["jupyterlab>=4"]
+
+[project.scripts]
+opensla = "opensla.cli:main"
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+
+[tool.setuptools.packages.find]
+where = ["src"]
+namespaces = false
+
