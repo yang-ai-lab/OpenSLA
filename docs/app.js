@@ -57,37 +57,32 @@
     setTimeout(next, 600);
   })();
 
-  /* ---------- Figures: the animation loads once the figure is on screen, with a pause button ---------- */
-  $$("img[data-animation]").forEach(function (img) {
-    var frame = img.closest("figure");
-    var btn = $(".anim-toggle", frame);
-    var poster = img.getAttribute("src"), anim = img.getAttribute("data-animation");
-    var loaded = false, loading = false, playing = false;
-
+  /* ---------- Teaser video: plays while on screen, with a pause button ---------- */
+  $$("video.anim").forEach(function (video) {
+    var btn = $(".anim-toggle", video.closest("figure"));
+    var userPaused = reduceMotion.matches;
+    video.muted = true;
+    function play() { var p = video.play(); if (p && p.catch) p.catch(function () {}); }
     function paint() {
-      img.src = playing ? anim : poster;
+      var playing = !video.paused;
       btn.setAttribute("aria-label", playing ? "Pause animation" : "Play animation");
       btn.innerHTML = '<i data-lucide="' + (playing ? "pause" : "play") + '" aria-hidden="true"></i>';
       icons();
     }
-    function load(thenPlay) {
-      if (loaded || loading) return;
-      loading = true;
-      var pre = new Image();
-      pre.onload = function () { loaded = true; playing = thenPlay; btn.hidden = false; paint(); };
-      pre.onerror = function () { loading = false; };
-      pre.src = anim;
-    }
+    video.addEventListener("play", paint);
+    video.addEventListener("pause", paint);
     btn.addEventListener("click", function () {
-      if (!loaded) { load(true); return; }
-      playing = !playing; paint();
+      userPaused = !video.paused;
+      if (userPaused) video.pause(); else play();
     });
-
-    if (reduceMotion.matches || !("IntersectionObserver" in window)) { btn.hidden = false; paint(); return; }
-    var seen = new IntersectionObserver(function (entries) {
-      if (entries.some(function (en) { return en.isIntersecting; })) { seen.disconnect(); load(true); }
-    }, { rootMargin: "200px 0px" });
-    seen.observe(img);
+    btn.hidden = false; paint();
+    if (!("IntersectionObserver" in window)) { if (!userPaused) play(); return; }
+    new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        if (en.isIntersecting) { if (!userPaused) play(); }
+        else if (!video.paused) video.pause();
+      });
+    }, { threshold: 0.2 }).observe(video);
   });
 
   /* ---------- Waveform shapes, shared by the hero stage and the demo card ---------- */
@@ -722,7 +717,13 @@
     if (!dialog || !dialog.showModal) { $$(".zoom-btn").forEach(function (b) { b.hidden = true; }); return; }
     $$(".zoom-btn").forEach(function (btn) {
       var fig = btn.closest("figure"), img = fig ? $("img", fig) : null, cap = fig ? $("figcaption", fig) : null;
+      var video = fig ? $("video", fig) : null;
       btn.addEventListener("click", function () {
+        if (video) {
+          if (video.requestFullscreen) video.requestFullscreen();
+          else if (video.webkitEnterFullscreen) video.webkitEnterFullscreen();
+          return;
+        }
         big.src = btn.getAttribute("data-src") || (img && (img.currentSrc || img.src)) || "";
         big.alt = img ? img.alt : "";
         title.textContent = btn.getAttribute("data-title") || (cap ? cap.textContent : "");

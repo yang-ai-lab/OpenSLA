@@ -55,7 +55,7 @@ body {
   overflow-x: hidden;
 }
 a { color: inherit; text-decoration: none; }
-img, svg, canvas { max-width: 100%; display: block; }
+img, svg, canvas, video { max-width: 100%; display: block; }
 button { font: inherit; color: inherit; }
 ::selection { background: rgba(102,76,188,.2); }
 :focus-visible { outline: 2px solid var(--purple); outline-offset: 3px; border-radius: 4px; }
@@ -248,7 +248,7 @@ a.btn.ghost:hover { transform: translateY(-2px); border-color: var(--purple); co
   -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
   -webkit-mask-composite: xor; mask-composite: exclude; pointer-events: none;
 }
-.visual-frame img { width: 100%; height: auto; border-radius: 6px; }
+.visual-frame img, .visual-frame video { width: 100%; height: auto; border-radius: 6px; }
 .visual-frame figcaption, .ground-fig figcaption, .alpha-fig figcaption { font-family: var(--sans); font-size: .88rem; color: var(--muted); padding: .8rem 5.6rem .9rem .3rem; text-align: left; min-height: 3.1rem; }
 .tool[hidden] { display: none; }
 .frame-tools { position: absolute; bottom: .5rem; right: .7rem; display: flex; gap: .4rem; z-index: 2; }
